@@ -28,6 +28,7 @@ public class Queue<T> {
     }
 
     public void enqueue(T t) {
+        if (t == null) throw new IllegalArgumentException("Element can't be null!");
         if (size < 0) throw new IndexOutOfBoundsException("size < 0");
         if (size == 0) {
             front = new Node<>(null, t, null);
@@ -45,12 +46,13 @@ public class Queue<T> {
     @SafeVarargs
     public final void addAll(T... t) {
         for (T elem : t) {
+            if (elem == null) throw new IllegalArgumentException("Element can't be null!");
             enqueue(elem);
         }
     }
 
     public boolean contains(T t) {
-        if (size <= 0) return false;
+        if (size <= 0 || t == null) return false;
         else if (size == 1 && front.value.equals(t)) {
             return true;
         }
